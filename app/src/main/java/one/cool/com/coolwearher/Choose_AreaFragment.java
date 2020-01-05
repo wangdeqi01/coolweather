@@ -2,12 +2,10 @@ package one.cool.com.coolwearher;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +54,7 @@ public class Choose_AreaFragment extends Fragment {
     /*当前选中的级别*/
     private int currentLevel;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -111,7 +109,7 @@ public class Choose_AreaFragment extends Fragment {
             listView.setSelection(0);
             currentLevel = LEVEL_PROVINCE;
         } else {
-            String address = "http//guolin.tech/api/china";
+            String address = "http://guolin.tech/api/china";
             queryFromServer(address, "province");
         }
     }
@@ -151,7 +149,7 @@ public class Choose_AreaFragment extends Fragment {
         } else {
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
-            String address = "heep://guolin.tech/api/china/" + provinceCode + "/" + cityCode;
+            String address = "http://guolin.tech/api/china/" + provinceCode + "/" + cityCode;
             queryFromServer(address, "county");
         }
     }
@@ -163,11 +161,10 @@ public class Choose_AreaFragment extends Fragment {
             public void onFailure(Call call, IOException e) {
                 //通过runOnuiThread()方法回到主线程处理逻辑
                 getActivity().runOnUiThread(new Runnable() {
-                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void run() {
                         closeProgressDialog();
-                        Toast.makeText(getContext(), "加载失败", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"加载失败", Toast.LENGTH_LONG).show();
                     }
                 });
             }
