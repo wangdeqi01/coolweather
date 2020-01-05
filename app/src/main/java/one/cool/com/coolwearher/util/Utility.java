@@ -2,6 +2,8 @@ package one.cool.com.coolwearher.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +11,7 @@ import org.json.JSONObject;
 import one.cool.com.coolwearher.db.City;
 import one.cool.com.coolwearher.db.County;
 import one.cool.com.coolwearher.db.Province;
+import one.cool.com.coolwearher.gson.Weather;
 
 public class Utility {
     /*解析和处理服务器返回的和省级数据*/
@@ -70,5 +73,16 @@ public class Utility {
         }
         return false;
     }
+public static Weather handleWeatherResponse(String response){
+        try{
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
+            String weatherContent=jsonArray.getJSONObject(0).toString();
+            return  new Gson().fromJson(weatherContent,Weather.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+}
 
 }
