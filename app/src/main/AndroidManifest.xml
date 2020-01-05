@@ -3,6 +3,7 @@
     package="one.cool.com.coolwearher">
 
     <application
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
